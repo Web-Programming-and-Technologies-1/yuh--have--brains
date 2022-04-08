@@ -1,10 +1,70 @@
-{% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-{{ super() }}
+      <img src="logo.jpeg" style="width:150px">
 
-{% block content %}
-    <h1>Flask MVC</h1>
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
-{% endblock %}
+      <title>Login/Signup</title>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+        body{
+          background-image: url("/App/templates/assets/Background.jpeg");
+        }
+        
+        div{
+          text-align: center
+        }
+        
+        .container{
+          color: white;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 150px;
+          padding-top: 5px;
+          padding-bottom: 10px;
+          width: 400px;
+          background-color: lightpink
+        }
+        
+        h1{
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
+                     0 3px 0 #ccc, 0 4px 0 #ccc,
+                     0 5px 0 #ccc, 0 6px 0 #ccc,
+                     0 7px 0 #ccc, 0 8px 0 #ccc
+      }
+      </style>
+    </head>
+
+    <body>
+      <div > 
+        <h3>Welcome to</h3>
+        <h1> Yuh Have Brains owah??</h1>
+      </div>
+
+      <div class= container>
+        <h2>Login or Sign Up to Get Started</h2>
+        <!-- ###enter place for data to go to server -->
+        <form action="">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username"><br><br>
+          <label for="password">Password:</label>
+          <input type="text" id="pw" name="pw"><br><br>
+          <input type="submit" value="Submit">
+          <input type="button" onclick="document.location='signup.html'" value="Sign Up">
+     
+        </form>
+      </div>
+
+      <div>
+       
+      </div>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+  </html>
