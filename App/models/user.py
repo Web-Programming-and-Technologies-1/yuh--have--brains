@@ -2,9 +2,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
+    gamesPlayed = db.relationship('MyGame', backref='user', lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, username, password):
         self.username = username
@@ -12,7 +13,7 @@ class User(db.Model):
 
     def toDict(self):
         return{
-            'id': self.id,
+            'id': self.userId,
             'username': self.username
         }
 
@@ -24,3 +25,5 @@ class User(db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
+# given in MVC Flask template
+# minor modification to suit students user class based on class diagram.
