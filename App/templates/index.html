@@ -6,7 +6,7 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <img src="logo.jpeg" style="width:150px">
+      <!-- <img src="logo.jpeg" style="width:150px"> -->
 
       <title>Login/Signup</title>
       <!--Let browser know website is optimized for mobile-->
@@ -42,6 +42,7 @@
     </head>
 
     <body>
+      <img  style="width:150px" src="{{url_for('static', filename='logo.jpeg')}}" />
       <div > 
         <h3>Welcome to</h3>
         <h1> Yuh Have Brains owah??</h1>
@@ -57,6 +58,7 @@
           <input type="text" id="pw" name="pw"><br><br>
           <input type="submit" value="Submit">
           <input type="button" onclick="document.location='signup.html'" value="Sign Up">
+          <!-- <a href="App/templates/signUp.html"> Sign up</a> -->
      
         </form>
       </div>
