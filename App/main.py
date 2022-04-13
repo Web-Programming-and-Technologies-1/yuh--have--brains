@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request, render_template
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -60,3 +60,13 @@ def create_app(config={}):
 
 app = create_app()
 migrate = get_migrate(app)
+
+@app.route('/')
+def signup():
+    return render_template('index.html')
+    
+@app.route('/signup')
+def client_app():
+  return render_template('signUp.html')
+
+
