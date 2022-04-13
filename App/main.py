@@ -65,8 +65,19 @@ migrate = get_migrate(app)
 def signup():
     return render_template('index.html')
     
-@app.route('/signup')
+@app.route('/signUpPage')
 def client_app():
   return render_template('signUp.html')
 
-
+@app.route('/signup', methods=['POST'])
+def signup():
+  userdata = request.get_json() # get userdata
+  newuser = user(username=userdata['username'], email=userdata['email']) # create user object
+  newuser.set_password(userdata['password']) # set password
+  try:
+    db.session.add(newuser)
+    db.session.commit() # save user
+  except IntegrityError: # attempted to insert a duplicate user
+    db.session.rollback()
+    return 'username or email already exists' # error message
+  return 'user created' # success
