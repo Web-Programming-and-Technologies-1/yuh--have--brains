@@ -5,7 +5,9 @@ class User(db.Model):
     userId = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    gamesPlayed = db.relationship('MyGame', backref='user', lazy=True, cascade="all, delete-orphan")
+    gameId =  db.Column(db.Integer, db.ForeignKey('community.communityId'), nullable=False)
+    myGames = db.relationship('MyGame', backref=db.backref('myGame', lazy='joined'))
+    # gamesPlayed = db.relationship('MyGame', backref='user', lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, username, password):
         self.username = username
@@ -14,7 +16,8 @@ class User(db.Model):
     def toDict(self):
         return{
             'id': self.userId,
-            'username': self.username
+            'username': self.username,
+            'myGames': [myGame.toDict() for myGame in self.MyGame]
         }
 
     def set_password(self, password):
