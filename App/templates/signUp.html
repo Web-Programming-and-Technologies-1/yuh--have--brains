@@ -1,52 +1,39 @@
-<!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      
-      <title>Login/Signup</title>
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <style>
-        body{
-          background-image: url("{{url_for('static', filename='Background.jpeg')}}");
-        }
-        div{
-          text-align: center
-        }
+{% extends "layout.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block page %}Sign Up{% endblock %}
 
-        .container{
-          color: white;
-          text-align: center;
-          margin-left: auto;
-          margin-right: auto;
-          margin-top: 200px;
-          padding-top: 5px;
-          padding-bottom: 10px;
-          width: 400px;
-          background-color: lightpink
-        }
-        
-      </style>
-    </head>
+{{ super() }}
 
-    <body>
-      <div class= container> 
-        <h2>Fill out the form to Sign Up</h2>
-        
-        <form action="###enter place for data to go to server">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" placeholder="Enter username"><br><br>
-          
-          <label for="password">Password:</label>
-          <input type="text" id="pw" name="pw" placeholder="Enter password"><br><br>
-          <input type="submit" value="Submit">
+{% block content %}
+ <div class="row">
+      <div class="row">
+        <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/signup">
+            {{ form.csrf_token }}
+
+            <div class="input-field col s12 m8 offset-m2"> 
+              {{ form.username(size=20, class="validate") }}
+              {{ form.username.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{ form.email(size=50, class="validate") }}
+              {{ form.email.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{ form.password(size=20, class="validate") }}
+              {{ form.password.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{ form.confirm(size=20, class="validate") }}
+              {{ form.confirm.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{form.submit}}
+            </div> 
         </form>
       </div>
-      
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-    </body>
-  </html>
+  </div>
+{% endblock %}

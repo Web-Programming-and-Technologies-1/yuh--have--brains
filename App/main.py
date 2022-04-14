@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 
+from .forms import SignUp
 
 from App.database import create_db, get_migrate
 
@@ -62,22 +63,24 @@ app = create_app()
 migrate = get_migrate(app)
 
 @app.route('/')
-def signup():
+def index():
     return render_template('index.html')
-    
-@app.route('/signUpPage')
-def client_app():
-  return render_template('signUp.html')
+
+@app.route('/signup', methods=['GET'])
+def signup():
+  form = SignUp() # create form object
+  return render_template('signUp.html', form=form) # pass form object to template
 
 @app.route('/signup', methods=['POST'])
-def signup():
-  userdata = request.get_json() # get userdata
-  newuser = user(username=userdata['username'], email=userdata['email']) # create user object
-  newuser.set_password(userdata['password']) # set password
-  try:
-    db.session.add(newuser)
-    db.session.commit() # save user
-  except IntegrityError: # attempted to insert a duplicate user
-    db.session.rollback()
-    return 'username or email already exists' # error message
-  return 'user created' # success
+def signupAction():
+  form = SignUp() # create form object
+  if form.validate_on_submit():
+    data = request.form # get data from form submission
+    newuser = User(username=data['username'], email=data['email']) # create user object
+    newuser.set_password(data['password']) # set password
+    db.session.add(newuser) # save new user
+    db.session.commit()
+    flash('Account Created!')# send message
+    return redirect(url_for('index'))# redirect to login page
+  flash('Error invalid input!')
+  return redirect(url_for('signup')) 
