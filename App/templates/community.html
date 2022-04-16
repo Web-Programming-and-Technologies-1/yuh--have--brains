@@ -6,17 +6,34 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <title>Login</title>
+  
+
+      <title>Community</title>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <style>
+
+        table, th, td {
+          border: 1px solid;
+          border-color: black;
+          background-color: yellow;
+          color: black;
+          width: 25%;
+          margin-left: 560px;
+        }
+
         body{
           background-image: url("{{url_for('static', filename='Background.jpeg')}}");
         }
         
         div{
-          text-align: center
+          text-align: center;
         }
+
+        .title{
+        padding-top: 15px;  
+        }
+
         
         .container{
           border-radius: 20px;
@@ -28,6 +45,7 @@
           padding-top: 5px;
           padding-bottom: 10px;
           width: 400px;
+          height: 150px;
           background-color: lightpink
         }
         
@@ -36,30 +54,64 @@
                      0 3px 0 #ccc, 0 4px 0 #ccc,
                      0 5px 0 #ccc, 0 6px 0 #ccc,
                      0 7px 0 #ccc, 0 8px 0 #ccc
-      }
+        }
+
+        input[type=text] {
+          width: 130px;
+          border: none;
+          border-radius: 20px;
+          -webkit-transition: width 0.4s ease-in-out;
+          transition: width 0.4s ease-in-out;
+        }
+
+        /* When the input field gets focus, change its width to 100% */
+        input[type=text]:focus {
+          border: none;
+          border-radius: 20px;
+          width: 80%;
+        }
+        
       </style>
     </head>
 
     <body>
-      <div > 
-        <h3>Welcome to</h3>
-        <h1> Yuh Have Brains ? </h1>
+      <div class = title > 
+        <h1>Yuh Have Friends Owah?</h1>
+        <h3>Where dem?</h3>
       </div>
 
       <div class= container>
-        <h2>Login or Sign Up to Get Started</h2>
+        <h2>Friends</h2>
         <!-- ###enter place for data to go to server -->
-        <form action="">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username"><br><br>
-          <label for="password">Password:</label>
-          <input type="text" id="pw" name="pw"><br><br>
-          <input type="button" onclick="document.location='main'" value="Submit">
-          <input type="button" onclick="document.location='signup'" value="Sign Up">
-          <!-- <a href="/workspace/yuh--have--brains/App/static/signUp.html"> Sign up</a> -->
-     
+        <form class="example" action="">
+          <input type="text" name="search" placeholder="Search Friend...">
         </form>
+        
       </div>
+
+      <div>
+        <h2>Yuh Fren and Dem </h2>
+         <table>
+           <thead>
+           <tr>
+           <th>Name</th>
+           </tr>
+ 
+           <tr>
+           <td>Sydney</td>
+           </tr>
+ 
+           <tr>
+           <td>Tamika</td>
+           </tr>
+ 
+           <tr>
+           <td>Joshua</td>
+           </tr>
+ 
+           </thead>
+         </table>  
+       </div>
 
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="js/materialize.min.js"></script>

@@ -84,3 +84,18 @@ def signupAction():
     return redirect(url_for('index'))# redirect to login page
   flash('Error invalid input!')
   return redirect(url_for('signup')) 
+
+@app.route('/main', methods=['GET'])
+def tomain():
+#   form = Login() # create form object
+  return render_template('main.html') # pass form object to template
+
+@app.route('/community', methods=['GET'])
+def tocommunity():
+#   form = Login() # create form object
+  return render_template('community.html') # pass form object to template
+
+@app.route('/playgame', methods=['GET'])
+def toplaygame():
+#   form = Login() # create form object for game
+  return render_template('playgame.html') # pass form object to template
