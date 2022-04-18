@@ -2,14 +2,14 @@ from App.models import User
 from App.models import Community
 from App.models import Leaderboard
 from App.models import MyGame
+from sqlalchemy import func
 
    # controllers
-def display_highest_score(username, score):
-    
-    return
+def display_highest_score(username):
+    return highest_score = db.session.query(func.max(MyGame.score))
 
 def display_history(username):
-    return
+    return username.myGame
 
 def delete_friend(userId):
     user = Community.Users.query.get(userId)
