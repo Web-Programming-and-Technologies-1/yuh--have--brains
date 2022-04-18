@@ -19,3 +19,5 @@ def get_all_users_json():
 
 def get_all_users():
     return User.query.all()
+
+ 
