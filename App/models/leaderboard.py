@@ -4,7 +4,7 @@ class Leaderboard(db.Model):
     __tablename__ = 'leaderboard'
     boardId = db.Column(db.Integer, primary_key=True)
     gameId =  db.Column(db.Integer, db.ForeignKey('myGame.gameId'), nullable=False)
-    communityId =  db.Column(db.Integer, db.ForeignKey('community.communityId'), nullable=False)
+    communityId =  db.Column(db.Integer, db.ForeignKey('community.communityId'))
     
 
     def __init__(self, gameId, communityId):
