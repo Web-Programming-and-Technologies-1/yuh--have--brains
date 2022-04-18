@@ -6,7 +6,7 @@ from sqlalchemy import func
 
    # controllers
 def display_highest_score(username):
-    return highest_score = db.session.query(func.max(MyGame.score))
+    return db.session.query(func.max(MyGame.score))
 
 def display_history(username):
     return username.myGame
