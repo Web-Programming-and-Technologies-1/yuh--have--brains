@@ -9,4 +9,7 @@ class SignUp(FlaskForm):
     confirm  = PasswordField('Repeat Password')
     submit = SubmitField('Sign Up', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
-    
+ class LogIn(FlaskForm):
+    username = StringField('username', validators=[InputRequired()])
+    password = PasswordField('New Password', validators=[InputRequired()])
+    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})   

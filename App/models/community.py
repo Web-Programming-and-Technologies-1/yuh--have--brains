@@ -1,6 +1,7 @@
 from App.database import db
 
 class Community(db.Model):
+    __tablename__ = 'community'
     communityId = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False, unique=True)
     # gameId =  db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)

@@ -8,6 +8,7 @@ from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 
 from .forms import SignUp
+from .playGame import 
 
 from App.database import create_db, get_migrate
 
