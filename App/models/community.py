@@ -7,10 +7,6 @@ class Community(db.Model):
     # gameId =  db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
     Users = db.relationship('User', backref=db.backref('community', lazy='joined'))
     
-
-    def __init__(self, gameId):
-        self.gameId = gameId
-
     def toDict(self):
         return{
             'id': self.communityId,

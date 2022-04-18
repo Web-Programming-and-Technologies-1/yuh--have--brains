@@ -6,10 +6,6 @@ class MyGame(db.Model):
     userId =  db.Column(db.Integer, db.ForeignKey('user.userId'), nullable=False)
     score = db.Column(db.Integer, nullable=False)
     leaderBoard = db.relationship('Leaderboard', backref=db.backref('leaderboard', lazy='joined'))
-    
-    def __init__(self, userId, score = 0):
-        self.userId = userId
-        self.score = score
 
     def toDict(self):
         return{
