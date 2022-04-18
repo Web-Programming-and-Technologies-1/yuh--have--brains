@@ -7,6 +7,8 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 
+from random_word import RandomWords
+
 from .forms import SignUp, LogIn
 # from .playGame import 
 
@@ -98,8 +100,12 @@ def tocommunity():
 
 @app.route('/playgame', methods=['GET'])
 def toplaygame():
-#   form = Login() # create form object for game
-  return render_template('playgame.html') # pass form object to template
+  r = RandomWords()
+  wordbank = []
+  for x in range(20):
+    wordbank.append(r.get_random_word())
+    print(wordbank[x])
+  return render_template('playgame.html', wordbank = wordbank) # pass form object to template
 
 @app.route('/login', methods=['GET'])
 def login():
