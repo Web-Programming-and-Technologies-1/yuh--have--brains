@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 
-from .forms import SignUp
-from .playGame import 
+from .forms import SignUp, LogIn
+# from .playGame import 
 
 from App.database import create_db, get_migrate
 
@@ -65,7 +65,7 @@ migrate = get_migrate(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+  return render_template('index.html')
 
 @app.route('/signup', methods=['GET'])
 def signup():
@@ -100,3 +100,22 @@ def tocommunity():
 def toplaygame():
 #   form = Login() # create form object for game
   return render_template('playgame.html') # pass form object to template
+
+@app.route('/login', methods=['GET'])
+def login():
+  form = LogIn()
+  return render_template('login.html', form=form)
+
+#user submits the login form
+@app.route('/login', methods=['POST'])
+def loginAction():
+  form = LogIn()
+  if form.validate_on_submit(): # respond to form submission
+      data = request.form
+      user = User.query.filter_by(username = data['username']).first()
+      if user and user.check_password(data['password']): # check credentials
+        flash('Logged in successfully.') # send message to next page
+        login_user(user) # login the user
+        return redirect(url_for('todos')) # redirect to main page if login successful
+  flash('Invalid credentials')
+  return redirect(url_for('index'))
