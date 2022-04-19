@@ -1,6 +1,7 @@
 import os
-from flask import Flask, request, render_template
-from flask_login import LoginManager, current_user
+from flask import Flask, request, render_template, flash, redirect, url_for
+from flask_jwt import JWT, jwt_required, current_identity
+from flask_login import LoginManager, current_user, login_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -9,8 +10,9 @@ from datetime import timedelta
 
 from random_word import RandomWords
 
+from .models import db , User#, Community, Leaderboard, MyGame
 from .forms import SignUp, LogIn
-# from .playGame import 
+
 
 from App.database import create_db, get_migrate
 
@@ -65,6 +67,26 @@ def create_app(config={}):
 app = create_app()
 migrate = get_migrate(app)
 
+''' Begin Flask Login Functions '''
+login_manager = LoginManager(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+''' End Flask Login Functions '''
+
+def authenticate(uname, password):
+  #search for the specified user
+  user = User.query.filter_by(username=uname).first()
+  #if user is found and password matches
+  if user and user.check_password(password):
+    return user
+
+#Payload is a dictionary which is passed to the function by Flask JWT
+def identity(payload):
+  return User.query.get(payload['identity'])
+
+jwt = JWT(app, authenticate, identity)
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -79,14 +101,14 @@ def signupAction():
   form = SignUp() # create form object
   if form.validate_on_submit():
     data = request.form # get data from form submission
-    newuser = User(username=data['username'], email=data['email']) # create user object
+    newuser = User(username=data['username']) # create user object
     newuser.set_password(data['password']) # set password
     db.session.add(newuser) # save new user
     db.session.commit()
     flash('Account Created!')# send message
-    return redirect(url_for('index'))# redirect to login page
+    return render_template('index.html')
   flash('Error invalid input!')
-  return redirect(url_for('signup')) 
+  return render_template('signUp.html', form = form)
 
 @app.route('/main', methods=['GET'])
 def tomain():
@@ -122,6 +144,9 @@ def loginAction():
       if user and user.check_password(data['password']): # check credentials
         flash('Logged in successfully.') # send message to next page
         login_user(user) # login the user
-        return redirect(url_for('todos')) # redirect to main page if login successful
+        return return_template('main.html') # redirect to main page if login successful
   flash('Invalid credentials')
-  return redirect(url_for('index'))
+  return return_template('login.html')
+
+  if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
