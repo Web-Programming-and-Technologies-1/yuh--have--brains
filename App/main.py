@@ -189,7 +189,7 @@ def tosearch():
 #   form = Login() # create form object
   return render_template('searchfriend.html') # pass form object to template
 
-@app.route('/ProcessUserinfo/<stringpoints>', methods=['GET'])
+@app.route('/ProcessUserinfo/<stringpoints>', methods=['POST'])
 @login_required
 def ProcessUserinfo(stringpoints):
   stringpoints = json.loads (stringpoints)
