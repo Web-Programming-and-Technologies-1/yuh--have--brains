@@ -93,6 +93,7 @@
     <input type="button" class="button button1" onclick="textSpeak()" value="Listen to Word"><br>
     <input type="text" id="answer" ><br>
     <input type="button" class="button button1" onclick="getAnswer()" value="Submit">
+    <p id="points"></p>
   </div>
  
 
@@ -130,10 +131,12 @@
     function play_game(answer) 
     {
       let playerAns = answer;
-    
+      document.getElementById("points").innerHTML = points;
       if(wordBank[number] == playerAns)
       {
+
         points = points + 1;
+        document.getElementById("points").innerHTML = points;
         responsiveVoice.speak('Correct');
         changeNum();
       }
