@@ -87,6 +87,10 @@ def identity(payload):
 
 jwt = JWT(app, authenticate, identity)
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -144,9 +148,9 @@ def loginAction():
       if user and user.check_password(data['password']): # check credentials
         flash('Logged in successfully.') # send message to next page
         login_user(user) # login the user
-        return return_template('main.html') # redirect to main page if login successful
+        return render_template('main.html') # redirect to main page if login successful
   flash('Invalid credentials')
-  return return_template('login.html')
+  return render_template('login.html')
 
   if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
