@@ -20,7 +20,7 @@
         text-align: center;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 150px;
+        margin-top: 10px;
         padding-top: 5px;
         padding-bottom: 10px;
         width: 400px;
@@ -37,6 +37,7 @@
       .button {
         background-color: lightpink; /* Play Game */
         border: none;
+        border-radius: 20px;
         color: white;
         padding: 16px 140px;
         text-align: center;
@@ -61,7 +62,7 @@
     </style>
   </head>
   <body>
-    <!-- <<nav class="purple">
+    <!-- <nav class="purple">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
@@ -72,7 +73,7 @@
             </ul>
         </div>
       </div>
-    </nav> -->
+    </nav>
     
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -86,9 +87,13 @@
       </div>
     </nav>
     {% endif %}
-    {% endwith %}
+    {% endwith %} -->
+    <div > 
+      <h1> Yuh Have Brains ? </h1>
+    </div>
 
     <div class="container">
+      
       {% block content %}{% endblock %}
     </div>
 

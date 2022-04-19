@@ -150,7 +150,22 @@ def loginAction():
         login_user(user) # login the user
         return render_template('main.html') # redirect to main page if login successful
   flash('Invalid credentials')
-  return render_template('login.html')
+  return render_template('login.html',form =form)
+
+@app.route('/add', methods=['GET'])
+def toadd():
+#   form = Login() # create form object
+  return render_template('addfriend.html') # pass form object to template
+
+@app.route('/remove', methods=['GET'])
+def toremove():
+#   form = Login() # create form object
+  return render_template('removefriend.html') # pass form object to template
+
+@app.route('/search', methods=['GET'])
+def tosearch():
+#   form = Login() # create form object
+  return render_template('searchfriend.html') # pass form object to template
 
   if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

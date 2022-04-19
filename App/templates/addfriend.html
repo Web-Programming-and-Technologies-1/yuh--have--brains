@@ -6,20 +6,10 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-
-      <title>Yuh Have Brains?</title>
+      <title>Add Friend</title>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <style>
-        table, th, td {
-          border: 1px solid;
-          border-color: black;
-          background-color: yellow;
-          color: black;
-          width: 25%;
-          margin-left: 560px;
-        }
-
         body{
           background-image: url("{{url_for('static', filename='Background.jpeg')}}");
         }
@@ -40,10 +30,6 @@
           width: 400px;
           background-color: lightpink
         }
-
-        .Container{
-          padding-top: 5px;
-        }
         
         h1{
         text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
@@ -51,7 +37,7 @@
                      0 5px 0 #ccc, 0 6px 0 #ccc,
                      0 7px 0 #ccc, 0 8px 0 #ccc
         }
-        
+
         .button {
           background-color: lightpink; /* Play Game */
           border: none;
@@ -73,59 +59,23 @@
 /*           border: 2px solid #4CAF50; */
         }
 
-      .button1:hover {
-        background-color: greenyellow;
-        color: black;
-      }
+        .button1:hover {
+          background-color: greenyellow;
+          color: black;
+        }
       </style>
     </head>
 
     <body>
-      <div class = Container > 
-        
-        <h1>Yuh Have Brains Owah?</h1>
-        
+      <div > 
+        <h1> Yuh Know How To Add Yuh Friends ? </h1>
       </div>
 
       <div class= container>
-        <button class="button button1" onclick="document.location='playgame'" >Play Game</button>
-        <button class="button button1" onclick="document.location='community'" >Add Friends</button>
-        
+        <h2>Add Yuh Friend Dem Nah</h2>
         
       </div>
 
-      <div>
-       <h2>LeaderBoard</h2>
-        <table>
-          <thead>
-          <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Points</th>
-          </tr>
-
-          <tr>
-          <td>1</td>
-          <td>Sydney</td>
-          <td>150</td>
-          </tr>
-
-          <tr>
-          <td>2</td>
-          <td>Tamika</td>
-          <td>125</td>
-          </tr>
-
-          <tr>
-          <td>3</td>
-          <td>Joshua</td>
-          <td>20</td>
-          </tr>
-
-          </thead>
-        </table>  
-      </div>
-      
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
