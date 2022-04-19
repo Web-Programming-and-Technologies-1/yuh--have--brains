@@ -4,12 +4,12 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 
 class User(db.Model, UserMixin):
+    __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String, nullable=False)
+    username =  db.Column(db.String, unique = True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    # communityId =  db.Column(db.Integer, db.ForeignKey('community.communityId'))
-    # myGames = db.relationship('MyGame', backref=db.backref('MyGame', lazy='joined'))
-    # gamesPlayed = db.relationship('MyGame', backref='user', lazy=True, cascade="all, delete-orphan")
+    friends = db.relationship('Friend', cascade="all, delete-orphan")
+    myGames = db.relationship('MyGame', cascade="all, delete-orphan")
 
     def __init__(self, username):
         self.username = username
@@ -30,19 +30,23 @@ class User(db.Model, UserMixin):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
-# class Community(db.Model):
-#     communityId = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(120), nullable=False, unique=True)
-#     # gameId =  db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
-#     users = db.relationship('User', backref=db.backref('Community', lazy='joined'))
+class Friend(db.Model):
+    __tablename__ = 'Friend'
+    fid = db.Column(db.Integer, primary_key=True)
+    id = db.Column('id', db.Integer, db.ForeignKey('User.id'))
+    name = db.Column(db.String(120), nullable=False, unique=True)
     
-#     def toDict(self):
-#         return{
-#             'id': self.communityId,
-#             'name': self.name,
-#             'gameId': self.gameId,
-#            'users': [user.toDict() for user in self.Users]
-#         }
+    def __init__(self, fid, name, id):
+        self.fid = fid
+        self.name = name
+        seld.id = id
+
+    def toDict(self):
+        return{
+            'fid': self.fid,
+            'username': self.username,
+            'id': self.id
+        }
 
 # class Leaderboard(db.Model):
 #     boardId = db.Column(db.Integer, primary_key=True)
@@ -55,14 +59,15 @@ class User(db.Model, UserMixin):
 #             'communityId': self.communityId
 #         }
 
-# class MyGame(db.Model):
-#     gameId = db.Column(db.Integer, primary_key=True)
-#     id =  db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     score = db.Column(db.Integer, nullable=False)
+class MyGame(db.Model):
+    __tablename = 'MyGame'
+    gameId = db.Column(db.Integer, primary_key=True)
+    id =  db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
+    score = db.Column(db.Integer, nullable=False)
 
-#     def toDict(self):
-#         return{
-#             'gameId': self.gameId,
-#             'userId': self.userId,
-#             'score': self.score
-#         }
+    def toDict(self):
+        return{
+            'gameId': self.gameId,
+            'userId': self.userId,
+            'score': self.score
+        }

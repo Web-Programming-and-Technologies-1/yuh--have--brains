@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, render_template, flash, redirect, url_for
 from flask_jwt import JWT, jwt_required, current_identity
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_user, login_required
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -10,8 +10,8 @@ from datetime import timedelta
 
 from random_word import RandomWords
 
-from .models import db , User#, Community, Leaderboard, MyGame
-from .forms import SignUp, LogIn
+from .models import db , User, Friend, MyGame
+from .forms import SignUp, LogIn, AddFriend
 
 
 from App.database import create_db, get_migrate
@@ -90,6 +90,7 @@ jwt = JWT(app, authenticate, identity)
 @app.before_first_request
 def create_tables():
     db.create_all()
+    db.session.commit()
 
 @app.route('/')
 def index():
@@ -115,16 +116,19 @@ def signupAction():
   return render_template('signUp.html', form = form)
 
 @app.route('/main', methods=['GET'])
+@login_required
 def tomain():
 #   form = Login() # create form object
   return render_template('main.html') # pass form object to template
 
 @app.route('/community', methods=['GET'])
+@login_required
 def tocommunity():
 #   form = Login() # create form object
   return render_template('community.html') # pass form object to template
 
 @app.route('/playgame', methods=['GET'])
+@login_required
 def toplaygame():
   r = RandomWords()
   wordbank = []
@@ -153,19 +157,36 @@ def loginAction():
   return render_template('login.html',form =form)
 
 @app.route('/add', methods=['GET'])
-def toadd():
-#   form = Login() # create form object
-  return render_template('addfriend.html') # pass form object to template
+@login_required
+def add():
+  form = AddFriend() # create form object
+  return render_template('addfriend.html', form=form) # pass form object to template
+
+@app.route('/add', methods=['POST'])
+@login_required
+def addAction():
+  form = AddFriend() # create form object
+  if form.validate_on_submit(): # respond to form submission
+      data = request.form
+      user = User.query.filter_by(username = data['username']).first()
+      if user:
+        friend = Friend(fid = user.id, name = user.username, id = current_identity.id)
+        db.session.add(friend)
+        db.session.commit()
+        return render_template('community.html') # pass form object to template
+      return render_template('addfriend.html', form=form)
 
 @app.route('/remove', methods=['GET'])
+@login_required
 def toremove():
 #   form = Login() # create form object
   return render_template('removefriend.html') # pass form object to template
 
 @app.route('/search', methods=['GET'])
+@login_required
 def tosearch():
 #   form = Login() # create form object
   return render_template('searchfriend.html') # pass form object to template
 
-  if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+if __name__ == '__main__':
+  app.run(host='0.0.0.0', port=8080, debug=True)

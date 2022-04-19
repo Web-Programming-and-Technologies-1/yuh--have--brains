@@ -12,3 +12,7 @@ class LogIn(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})   
+
+class AddFriend(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
