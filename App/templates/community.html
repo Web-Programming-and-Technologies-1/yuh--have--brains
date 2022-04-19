@@ -5,9 +5,7 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
   
-
       <title>Community</title>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,7 +17,7 @@
           background-color: yellow;
           color: black;
           width: 25%;
-          margin-left: 560px;
+          margin-left: 150px;
         }
 
         body{
@@ -45,17 +43,33 @@
           padding-top: 5px;
           padding-bottom: 10px;
           width: 450px;
-          height: 200px;
+          height: 410px;
           background-color: lightpink
         }
         
         h1{
+        color: white;
         text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
                      0 3px 0 #ccc, 0 4px 0 #ccc,
                      0 5px 0 #ccc, 0 6px 0 #ccc,
-                     0 7px 0 #ccc, 0 8px 0 #ccc
+                     0 7px 0 #ccc, 0 8px 0 #ccc;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 75px;
+        font-weight: 100;
         }
 
+        h2{
+          color: black;
+          text-shadow: 0 1px 0 white, 0 2px 0 white,
+                     0 3px 0 white, 0 4px 0 white;
+          font: bold;
+          font-family: 'Courier New', Courier, monospace;
+        }
+
+        h3{
+          color: black;
+        }
+         
         input[type=text] {
           width: 130px;
           border: none;
@@ -101,13 +115,13 @@
 
     <body>
       <div class = title > 
-        <h1>Yuh Have Friends Owah?</h1>
-        <h3>Where dem?</h3>
+        <h1>Yuh Have Brains?</h1>
+        <h2>Yuh Have Frens?</h2>
       </div>
 
       <div>
-        <h3>This is the community which is considered your small circle.</h3>
-        <h3>The friends in this community will be displayed on the Leaderboard</h3>
+        <h3>This is 'Yuh Community' which is considered your small circle.</h3>
+        <h3>Yuh Friends in your community will be displayed on the Leaderboard!</h3>
       </div>
       <div class= container>
         <!-- <h2>Friends</h2>
@@ -118,26 +132,42 @@
         <button class="button button1" onclick="document.location='add'" >Add Friend</button>
         <button class="button button1" onclick="document.location='remove'" >Remove Friend</button>
         <button class="button button1" onclick="document.location='search'" >Search Friend</button>
-      </div>
+        <h2 style=color:white;font-weight:100;text-shadow:none>LeaderBoard</h2>
+      <!-- </div>
 
-      <div>
-        <h2>Yuh Fren and Dem </h2>
+      
+      <div> -->
+        
          <table>
            <thead>
            <tr>
+           <th>Rank</th>
            <th>Name</th>
+           <th>Points</th>
            </tr>
  
            <tr>
+           <td>1</td>
            <td>Sydney</td>
+           <td>150</td>
            </tr>
  
            <tr>
+           <td>2</td>
            <td>Tamika</td>
+           <td>125</td>
            </tr>
+
+           <tr>
+            <td>3</td>
+            <td>Veron</td>
+            <td>120</td>
+            </tr>
  
            <tr>
+           <td>4</td>
            <td>Joshua</td>
+           <td>20</td>
            </tr>
  
            </thead>
