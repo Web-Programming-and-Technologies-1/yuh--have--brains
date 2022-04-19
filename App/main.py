@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, flash, redirect, url_for
+from flask import Flask, request, render_template, flash, redirect, url_for, g
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_login import LoginManager, current_user, login_user, login_required
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -7,6 +7,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
+import json
 
 from random_word import RandomWords
 
@@ -124,7 +125,7 @@ def tomain():
 @app.route('/community', methods=['GET'])
 @login_required
 def tocommunity():
-#   form = Login() # create form object
+  
   return render_template('community.html') # pass form object to template
 
 @app.route('/playgame', methods=['GET'])
@@ -170,7 +171,7 @@ def addAction():
       data = request.form
       user = User.query.filter_by(username = data['username']).first()
       if user:
-        friend = Friend(fid = user.id, name = user.username, id = current_identity.id)
+        friend = Friend(fid = user.id, name = user.username, id = current_user.id)
         db.session.add(friend)
         db.session.commit()
         return render_template('community.html') # pass form object to template
@@ -187,6 +188,15 @@ def toremove():
 def tosearch():
 #   form = Login() # create form object
   return render_template('searchfriend.html') # pass form object to template
+
+@app.route('/ProcessUserinfo/<stringpoints>', methods=['GET'])
+@login_required
+def ProcessUserinfo(stringpoints):
+  stringpoints = json.loads (stringpoints)
+  points = int(stringpoints)
+  print(points)
+  game = MyGame(id = current_user.id, score = points)
+  return render_template('main.html')
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, debug=True)

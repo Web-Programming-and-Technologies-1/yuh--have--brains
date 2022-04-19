@@ -36,10 +36,10 @@ class Friend(db.Model):
     id = db.Column('id', db.Integer, db.ForeignKey('User.id'))
     name = db.Column(db.String(120), nullable=False, unique=True)
     
-    def __init__(self, fid, name, id):
+    def __init__(self, fid, id, name):
         self.fid = fid
+        self.id = id
         self.name = name
-        seld.id = id
 
     def toDict(self):
         return{
