@@ -12,7 +12,7 @@ import json
 from random_word import RandomWords
 
 from .models import db , User, Friend, MyGame
-from .forms import SignUp, LogIn, AddFriend
+from .forms import SignUp, LogIn, AddFriend, RemoveFriend
 
 
 from App.database import create_db, get_migrate
@@ -176,23 +176,37 @@ def addAction():
       data = request.form
       user = User.query.filter_by(username = data['username']).first()
       if user:
-        scores = MyGame.query.filter_by(id = user.id).all()
-        print(scores)
+        friendGame = MyGame.query.filter_by(id = user.id).all()
         highest = 0
-        for score in scores:
-          if highest < score:
-            highest = score
+        for game in friendGame:
+          if highest < game.score:
+            highest = game.score
         friend = Friend(fid = user.id, name = user.username, id = current_user.id, score = highest)
         db.session.add(friend)
         db.session.commit()
-        return render_template('community.html') # pass form object to template
+        return render_template('main.html') # pass form object to template
       return render_template('addfriend.html', form=form)
 
-@app.route('/remove', methods=['GET'])
+@app.route('/delete', methods=['GET'])
 @login_required
-def toremove():
-#   form = Login() # create form object
-  return render_template('removefriend.html') # pass form object to template
+def delete():
+  form = RemoveFriend()
+  return render_template('removefriend.html', form = form) # pass form object to template
+
+@app.route('/delete', methods=['POST'])
+@login_required
+def deleteAction():
+  form = RemoveFriend()
+  if form.validate_on_submit(): # respond to form submission
+    data = request.form
+    user = User.query.filter_by(username = data['username']).first()
+    if user:
+      friend = Friend.query.get(user.id)
+      print(friend)
+      db.session.delete(friend) # delete the object
+      db.session.commit()
+      return render_template('main.html') # pass form object to template
+  return render_template('removeFriend.html', form=form)
 
 @app.route('/search', methods=['GET'])
 @login_required
@@ -206,7 +220,9 @@ def ProcessUserinfo(stringpoints):
   stringpoints = json.loads (stringpoints)
   points = int(stringpoints)
   game = MyGame(id = current_user.id, score = points)
-  return render_template('main.html')
+  db.session.add(game)
+  db.session.commit()
+  return ('/')
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, debug=True)
