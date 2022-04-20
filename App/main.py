@@ -97,6 +97,10 @@ def create_tables():
 def index():
   return render_template('index.html')
 
+@app.route('/losegame')
+def loseGame():
+  return render_template('losegame.html')
+
 @app.route('/signup', methods=['GET'])
 def signup():
   form = SignUp() # create form object
@@ -125,8 +129,9 @@ def tomain():
 @app.route('/community', methods=['GET'])
 @login_required
 def tocommunity():
-  
-  return render_template('community.html') # pass form object to template
+  results = []
+  results = Friend.query.filter_by(id=current_user.id).all()
+  return render_template('community.html', results = results) # pass form object to template
 
 @app.route('/playgame', methods=['GET'])
 @login_required
@@ -166,6 +171,7 @@ def add():
 @app.route('/add', methods=['POST'])
 @login_required
 def addAction():
+  print("hi")
   form = AddFriend() # create form object
   if form.validate_on_submit(): # respond to form submission
       data = request.form

@@ -135,41 +135,27 @@
         <button class="button">Leaderboard</button>
      
         
-         <table>
-           <thead>
-           <tr>
-           <th>Rank</th>
-           <th>Name</th>
-           <th>Points</th>
-           </tr>
- 
-           <tr>
-           <td>1</td>
-           <td>Sydney</td>
-           <td>150</td>
-           </tr>
- 
-           <tr>
-           <td>2</td>
-           <td>Tamika</td>
-           <td>125</td>
-           </tr>
-
-           <tr>
-            <td>3</td>
-            <td>Veron</td>
-            <td>120</td>
+        <div class="row">
+          <table class="col m6 offset-m3">
+            <!-- Add jinja templateing to show Namy, type1, type2, Weight and Height of user's pokemon  -->
+            <thead>
+              <tr>
+                <!-- <th>Position</th> -->
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for result in results %}
+            <tr>
+              <!-- <td></td> -->
+              <td>{{result.name}}</td>
+              <td>{{result.score}}</td>
             </tr>
- 
-           <tr>
-           <td>4</td>
-           <td>Joshua</td>
-           <td>20</td>
-           </tr>
- 
-           </thead>
-         </table>  
-       </div>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
 
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
