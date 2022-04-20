@@ -32,10 +32,22 @@
         }
         
         h1{
+        color: white;
         text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
                      0 3px 0 #ccc, 0 4px 0 #ccc,
                      0 5px 0 #ccc, 0 6px 0 #ccc,
-                     0 7px 0 #ccc, 0 8px 0 #ccc
+                     0 7px 0 #ccc, 0 8px 0 #ccc;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 75px;
+        font-weight: 100;
+        }
+
+        h2{
+          color: black;
+          text-shadow: 0 1px 0 white, 0 2px 0 white,
+                     0 3px 0 white, 0 4px 0 white;
+          font: bold;
+          font-family: 'Courier New', Courier, monospace;
         }
 
         .button {
@@ -63,16 +75,38 @@
           background-color: greenyellow;
           color: black;
         }
+
+      /* back and home buttons */
+      .previous {
+        background-color: #f1f1f1;
+        color: black;
+      }
+
+      .home {
+        background-color: white;
+        color: black;
+      }
+
+      .round {
+        border-radius: 50%;
+      }
+
       </style>
     </head>
 
     <body>
-      <div > 
-        <h1> Yuh Removing The Haters Dem? </h1>
+      <div >
+        <!-- back and home buttons -->
+        <a href="#" class="previous">&laquo; Previous</a>
+        <a href="#" class="Home">Home &raquo;</a>
+        
+        <h1> Yuh Have Brains? </h1>
+        <h2>Yuh Removing D' Haters Dem?</h2>
       </div>
 
       <div class= container>
-        <h2>Remove Friends Here</h2>
+        
+        <button class="button button1" onclick= >Remove Friends Here</button>
         
       </div>
 
