@@ -35,11 +35,13 @@ class Friend(db.Model):
     fid = db.Column(db.Integer, primary_key=True)
     id = db.Column('id', db.Integer, db.ForeignKey('User.id'))
     name = db.Column(db.String(120), nullable=False, unique=True)
+    score = db.Column(db.Integer, nullable = True)
     
-    def __init__(self, fid, id, name):
+    def __init__(self, fid, id, name, score):
         self.fid = fid
         self.id = id
         self.name = name
+        self.score = score
 
     def toDict(self):
         return{

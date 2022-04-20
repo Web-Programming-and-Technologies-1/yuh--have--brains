@@ -171,13 +171,18 @@ def add():
 @app.route('/add', methods=['POST'])
 @login_required
 def addAction():
-  print("hi")
   form = AddFriend() # create form object
   if form.validate_on_submit(): # respond to form submission
       data = request.form
       user = User.query.filter_by(username = data['username']).first()
       if user:
-        friend = Friend(fid = user.id, name = user.username, id = current_user.id)
+        scores = MyGame.query.filter_by(id = user.id).all()
+        print(scores)
+        highest = 0
+        for score in scores:
+          if highest < score:
+            highest = score
+        friend = Friend(fid = user.id, name = user.username, id = current_user.id, score = highest)
         db.session.add(friend)
         db.session.commit()
         return render_template('community.html') # pass form object to template
@@ -200,7 +205,6 @@ def tosearch():
 def ProcessUserinfo(stringpoints):
   stringpoints = json.loads (stringpoints)
   points = int(stringpoints)
-  print(points)
   game = MyGame(id = current_user.id, score = points)
   return render_template('main.html')
 
