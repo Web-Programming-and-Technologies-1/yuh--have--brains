@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+
+      <title>Home Page</title>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+        table, th, td {
+          border: 1px solid;
+          border-color: black;
+          background-color: yellow;
+          color: black;
+          width: 25%;
+          margin-left: 560px;
+        }
+
+        body{
+          background-image: url("{{url_for('static', filename='Background.jpeg')}}");
+        }
+        
+        div{
+          text-align: center
+        }
+        
+        .container{
+          border-radius: 20px;
+          color: white;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
+          padding-top: 5px;
+          padding-bottom: 10px;
+          width: 400px;
+          background-color: lightpink
+        }
+
+        .Container{
+          padding-top: 5px;
+        }
+        
+        h1{
+        color: white;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
+                     0 3px 0 #ccc, 0 4px 0 #ccc,
+                     0 5px 0 #ccc, 0 6px 0 #ccc,
+                     0 7px 0 #ccc, 0 8px 0 #ccc;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 75px;
+        font-weight: 100;
+        }
+        
+        .button {
+          background-color: lightpink; /* Play Game */
+          border: none;
+          border-radius: 20px;
+          color: white;
+          padding: 16px 140px;
+          text-align: center;
+          display: inline-block;
+/*           font: monospace: lucida console; */
+          font-size: 20px;
+          margin: 5px 2px;
+          transition-duration: 0.6s;
+          cursor: pointer;
+        }
+        
+        .button1 {
+          background-color: lightpink; 
+          color: white; 
+/*           border: 2px solid #4CAF50; */
+        }
+
+      .button1:hover {
+        background-color: greenyellow;
+        color: black;
+      }
+      </style>
+    </head>
+
+    <body>
+      <div class= container>
+        <h1>Yuh Have No Brains :(</h1>
+        <h2>Yuh Loss</h2>
+        <button class="button button1" onclick="document.location='playgame'" >Play New Game</button>
+        <button class="button button1" onclick="document.location='main'" >Home</button>
+        
+        
+      </div>
+      
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+  </html>
