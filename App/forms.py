@@ -20,3 +20,7 @@ class AddFriend(FlaskForm):
 class RemoveFriend(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
+
+class SearchFriend(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})

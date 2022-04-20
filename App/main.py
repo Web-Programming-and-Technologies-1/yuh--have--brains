@@ -12,7 +12,7 @@ import json
 from random_word import RandomWords
 
 from .models import db , User, Friend, MyGame
-from .forms import SignUp, LogIn, AddFriend, RemoveFriend
+from .forms import SignUp, LogIn, AddFriend, RemoveFriend, SearchFriend
 
 
 from App.database import create_db, get_migrate
@@ -202,7 +202,6 @@ def deleteAction():
     user = User.query.filter_by(username = data['username']).first()
     if user:
       friend = Friend.query.get(user.id)
-      print(friend)
       db.session.delete(friend) # delete the object
       db.session.commit()
       return render_template('main.html') # pass form object to template
@@ -211,8 +210,19 @@ def deleteAction():
 @app.route('/search', methods=['GET'])
 @login_required
 def tosearch():
-#   form = Login() # create form object
-  return render_template('searchfriend.html') # pass form object to template
+  form = SearchFriend() # create form object
+  return render_template('searchfriend.html', form = form) # pass form object to template
+
+@app.route('/search', methods=['POST'])
+@login_required
+def searchAction():
+  form = SearchFriend()
+  if form.validate_on_submit(): # respond to form submission
+    data = request.form
+    user = User.query.filter_by(username = data['username']).first()
+    if user:
+      return render_template('searchfriend.html') # pass form object to template
+  return render_template('searchfriend.html', form=form) 
 
 @app.route('/ProcessUserinfo/<stringpoints>', methods=['POST'])
 @login_required
