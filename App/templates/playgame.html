@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 
 
-  <title>Game Mode</title>
+  <title>Yuh Have Brains?</title>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
@@ -21,13 +21,13 @@
     }
 
 
-    .container{
+    .container {
       border-radius: 20px;
       color: white;
       text-align: center;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 50px;
+      margin-top: 150px;
       padding-top: 5px;
       padding-bottom: 10px;
       width: 400px;
@@ -38,34 +38,23 @@
       padding-top: 5px;
     }
 
-    h1{
-        color: white;
-        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
-                     0 3px 0 #ccc, 0 4px 0 #ccc,
-                     0 5px 0 #ccc, 0 6px 0 #ccc,
-                     0 7px 0 #ccc, 0 8px 0 #ccc;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 75px;
-        font-weight: 100;
-        }
-
-    h2{
-        color: black;
-        text-shadow: 0 1px 0 white, 0 2px 0 white,
-                     0 3px 0 white, 0 4px 0 white;
-        font: bold;
-        font-family: 'Courier New', Courier, monospace;
-        }    
+    h1 {
+      text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc,
+        0 3px 0 #ccc, 0 4px 0 #ccc,
+        0 5px 0 #ccc, 0 6px 0 #ccc,
+        0 7px 0 #ccc, 0 8px 0 #ccc
+    }
 
     .button {
-      background-color: lightpink; /* Play Game */
+      background-color: lightpink;
+      /* Play Game */
       border: none;
       border-radius: 20px;
       color: white;
       padding: 10px 20px;
       text-align: center;
       display: inline-block;
-         /*  font: monospace: lucida console; */
+      /*  font: monospace: lucida console; */
       font-size: 20px;
       margin: 5px 2px;
       transition-duration: 0.6s;
@@ -73,22 +62,15 @@
     }
 
     .button1 {
-      background-color: lightpink; 
-      color: white; 
-      padding: 16px 120px;
-      text-align: center;
-      display: inline-block;
-      font-size: 20px;
-      margin: 5px 2px;
-      transition-duration: 0.6s;
-      cursor: pointer;
+      background-color: lightpink;
+      color: white;
+      /*           border: 2px solid #4CAF50; */
     }
 
     .button1:hover {
       background-color: greenyellow;
       color: black;
     }
-
   </style>
 </head>
 
@@ -99,67 +81,75 @@
 
   </div>
 
-  <script type="text/javascript" src="https://code.responsivevoice.org/responsivevoice.js"></script> </script>
+  <script type="text/javascript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
+  </script>
 
   <div>
-    <h2>Instructions:</h2>
-    <h3>Click 'Listen to Word' to hear your word. Try to spell the spoken word in the text box.</h3>
+    <h3>Click 'Listen to Word' to hear your word.</h3>
+    <h3>Try to spell the spoken word in the text box.</h3>
     <h3>Press Submit to see if Yuh Have Brains!</h3>
   </div>
 
-  <div class = container>
+  <div class=container>
     <input type="button" class="button button1" onclick="textSpeak()" value="Listen to Word"><br>
-    <input type="text" id="answer" ><br>
+    <input type="text" id="answer"><br>
     <input type="button" class="button button1" onclick="getAnswer()" value="Submit">
+    <p id="points"></p>
   </div>
- 
+
 
   <!--JavaScript at end of body for optimized loading-->
   <script>
-    
+
     let wordBank = [];
-    wordBank = {{wordbank|tojson}};
+    wordBank = {{ wordbank | tojson }};
     let number = 1;
     let points = 0;
 
-    function changeNum()
-    {
+    function changeNum() {
       number = number + 1;
     }
 
-    function getGameWord()
-    {
+    function getGameWord() {
       let gameWord = wordBank[number];
       return gameWord;
     }
 
-    function textSpeak()
-    {
+    function textSpeak() {
       let gameWord = getGameWord();
       responsiveVoice.speak(gameWord);
     }
-    
-    function getAnswer()
-    {
+
+    function getAnswer() {
       let answer = document.getElementById('answer').value;
       play_game(answer);
     }
 
-    function play_game(answer) 
-    {
+    function play_game(answer) {
       let playerAns = answer;
-    
-      if(wordBank[number] == playerAns)
-      {
+      document.getElementById("points").innerHTML = points;
+      if (wordBank[number] == playerAns) {
+
         points = points + 1;
+        document.getElementById("points").innerHTML = points;
         responsiveVoice.speak('Correct');
         changeNum();
       }
-      else
-      {
+      else {
         responsiveVoice.speak('Incorrect');
+        sendUserinfo();
+      }
+
+      function sendUserinfo(){
+        let stringpoints = document.getElementById("points").innerHTML;
+        console.log(stringpoints);
+        const request = new XMLHttpRequest();
+        request.open('POST', `/ProcessUserinfo/${(stringpoints)}`);
+        request.send();
+        window.location.href = '/main';
       }
       
+
     }
 
   </script>
