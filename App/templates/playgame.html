@@ -164,7 +164,7 @@
         let stringpoints = document.getElementById("points").innerHTML;
         console.log(stringpoints);
         const request = new XMLHttpRequest();
-        request.open('POST', `/ProcessUserinfo/${(stringpoints)}`);
+        request.open('POST', `/getpoints/${(stringpoints)}`);
         request.send();
         window.location.href = '/losegame';
       }

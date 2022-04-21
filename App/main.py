@@ -234,9 +234,9 @@ def searchAction():
   flash('Add user a friend to search!')
   return render_template('searchfriend.html', form=form, result = result)
 
-@app.route('/ProcessUserinfo/<stringpoints>', methods=['POST'])
+@app.route('/getpoints/<stringpoints>', methods=['POST'])
 @login_required
-def ProcessUserinfo(stringpoints):
+def getPoints(stringpoints):
   stringpoints = json.loads (stringpoints)
   points = int(stringpoints)
   game = MyGame(id = current_user.id, score = points)
