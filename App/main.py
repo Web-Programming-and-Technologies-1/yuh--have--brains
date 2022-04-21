@@ -1,5 +1,7 @@
 import os
 from flask import Flask, request, render_template, flash, redirect, url_for, g
+import sys
+import logging
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_login import LoginManager, current_user, login_user, login_required
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -8,6 +10,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 import json
+
 
 from random_word import RandomWords
 
@@ -30,7 +33,9 @@ views = [
     user_views,
     api_views
 ]
-
+app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 def add_views(app, views):
     for view in views:
         app.register_blueprint(view)
