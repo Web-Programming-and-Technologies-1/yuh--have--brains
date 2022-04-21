@@ -211,18 +211,23 @@ def deleteAction():
 @login_required
 def tosearch():
   form = SearchFriend() # create form object
-  return render_template('searchfriend.html', form = form) # pass form object to template
+  result = []
+  return render_template('searchfriend.html', form = form, result=result) # pass form object to template
 
 @app.route('/search', methods=['POST'])
 @login_required
 def searchAction():
   form = SearchFriend()
+  result = []
   if form.validate_on_submit(): # respond to form submission
     data = request.form
     user = User.query.filter_by(username = data['username']).first()
     if user:
-      return render_template('searchfriend.html') # pass form object to template
-  return render_template('searchfriend.html', form=form) 
+      friend = Friend.query.get(user.id)
+      result = friend
+      print(result.name)
+      return render_template('searchfriend.html', form = form, result = result) # pass form object to template
+  return render_template('searchfriend.html', form=form, result = result)
 
 @app.route('/ProcessUserinfo/<stringpoints>', methods=['POST'])
 @login_required

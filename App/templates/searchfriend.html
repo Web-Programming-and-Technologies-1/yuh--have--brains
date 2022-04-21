@@ -10,7 +10,7 @@
    <div>
      <h3>Search Friend</h3>
       <div class="row">
-        <form class="col s12 m8 offset-m2" method="POST" action="/add"> 
+        <form class="col s12 m8 offset-m2" method="POST" action="/search"> 
             {{ form.csrf_token }}
 
             <div class="input-field col s12 m8 offset-m2">
@@ -23,6 +23,27 @@
             <!-- <div class="input-field col s12 m8 offset-m2"> -->
               {{form.submit}}
             </div>  
+
+            <div class="row">
+              <table class="col m6 offset-m3">
+                <!-- Add jinja templateing to show Namy, type1, type2, Weight and Height of user's pokemon  -->
+                <thead>
+                  <tr>
+                    <!-- <th>Position</th> -->
+                    <th>Name</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <!-- <td></td> -->
+                  <td>{{result.name}}</td>
+                  <td>{{result.score}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
         </form>
       </div>
   </div>
