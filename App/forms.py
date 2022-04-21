@@ -15,12 +15,12 @@ class LogIn(FlaskForm):
 
 class AddFriend(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
-    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
+    submit = SubmitField('Add', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 class RemoveFriend(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
-    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
+    submit = SubmitField('Remove', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 class SearchFriend(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
-    submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
+    submit = SubmitField('Search', render_kw={'class': 'btn waves-effect waves-light white-text'})
