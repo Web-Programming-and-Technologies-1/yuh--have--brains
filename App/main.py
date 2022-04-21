@@ -115,7 +115,6 @@ def signupAction():
     newuser.set_password(data['password']) # set password
     db.session.add(newuser) # save new user
     db.session.commit()
-    flash('Account Created!')# send message
     return render_template('index.html')
   flash('Error invalid input!')
   return render_template('signUp.html', form = form)
@@ -138,9 +137,12 @@ def tocommunity():
 def toplaygame():
   r = RandomWords()
   wordbank = []
-  for x in range(20):
-    wordbank.append(r.get_random_word())
-    print(wordbank[x])
+
+  for x in range(25):
+    random = r.get_random_word()
+    if random != None:
+      wordbank.append(random)
+
   return render_template('playgame.html', wordbank = wordbank) # pass form object to template
 
 @app.route('/login', methods=['GET'])
@@ -185,6 +187,7 @@ def addAction():
         db.session.add(friend)
         db.session.commit()
         return render_template('main.html') # pass form object to template
+      flash('User not found!')
       return render_template('addfriend.html', form=form)
 
 @app.route('/delete', methods=['GET'])
@@ -205,6 +208,7 @@ def deleteAction():
       db.session.delete(friend) # delete the object
       db.session.commit()
       return render_template('main.html') # pass form object to template
+  flash('User not found!')
   return render_template('removeFriend.html', form=form)
 
 @app.route('/search', methods=['GET'])
@@ -227,6 +231,7 @@ def searchAction():
       result = friend
       print(result.name)
       return render_template('searchfriend.html', form = form, result = result) # pass form object to template
+  flash('Add user a friend to search!')
   return render_template('searchfriend.html', form=form, result = result)
 
 @app.route('/ProcessUserinfo/<stringpoints>', methods=['POST'])
