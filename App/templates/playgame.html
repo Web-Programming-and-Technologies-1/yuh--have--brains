@@ -136,7 +136,8 @@
 
     function textSpeak() {
       let gameWord = getGameWord();
-      responsiveVoice.speak(gameWord);
+      let read = "Your word is " + gameWord
+      responsiveVoice.speak(read);
     }
 
     function getAnswer() {
